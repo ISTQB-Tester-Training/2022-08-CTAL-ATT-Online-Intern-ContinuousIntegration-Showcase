@@ -11,7 +11,7 @@ pipeline {
 
                 git 'https://github.com/ISTQB-Tester-Training/2022-08-CTAL-ATT-Online-Intern-ContinuousIntegration-Showcase.git'
 
-                sh "mvn compile"
+                sh "mvn compile -DskipTests"
             }
         }
         stage('Unit Tests TDD') {
@@ -23,7 +23,7 @@ pipeline {
         stage('Code Analysis') {
             steps {
 
-                sh "mvn verify sonar:sonar -Dsonar.host.url=http://80.158.7.52:30002 -Dsonar.login=$SQ_TOKEN"
+                sh "mvn verify sonar:sonar -DskipTests -Dsonar.host.url=http://80.158.7.52:30002 -Dsonar.login=$SQ_TOKEN"
             }
         }
         stage('Behavior Tests BDD') {
